@@ -205,10 +205,10 @@
 <div class="flex justify-between items-center max-w-[90rem] mx-auto px-margin-mobile md:px-margin-desktop">
 <div class="flex items-center gap-2">
 <img alt="Gemini Energy Logo" class="object-contain w-10 h-10" src="https://lh3.googleusercontent.com/aida/AP1WRLsAf7KJymICKb3kvqwpUJG_mUu6x1SmqhVr3X6rlzElFcAx8RQZSs0CLt1e7RIWyuSwA9aEdKaK7BQV8MBN4iEp_ZmFBaQZUu2fTpsp3FE-_h8SOV2Oah6S3jFoEsDSKE5ckJtaOm2x70MELrYFMuAlxhNRmeNJWlLz8xXyvbwP4QpKeF_jIqZEDBEFr3TFR-7qxZUimYnA0TqrVdo4nHlUDW2V2K1kLbtzWVaY4cB3EYW5HYPn2D1mmHE">
-<span class="font-headline-lg text-text-primary text-3xl font-semibold flex items-center" style="opacity: 0;">GeminiEnergy <span class="text-electric-blue ml-2">AI</span></span>
+<span class="font-headline-lg text-text-primary text-3xl font-semibold flex items-center">GeminiEnergy <span class="text-electric-blue ml-2">AI</span></span>
 </div>
 <div class="flex items-center gap-md">
-<a class="btn-pulse bg-electric-blue text-white px-6 rounded font-body-md text-body-md font-medium hover:bg-blue-600 transition-colors shadow-sm py-2.5" href="#">Request a Demo</a>
+<a class="btn-pulse bg-electric-blue text-white px-6 rounded font-body-md text-body-md font-medium hover:bg-blue-600 transition-colors shadow-sm py-2.5" href="#demo-form">Request a Demo</a>
 </div>
 </div>
 </header>
@@ -222,7 +222,7 @@
           Stop manually matching specs. Our AI ingests complex RFQs, instantly cross-references your entire catalog, and drafts winning bids in seconds, not days.
         </p>
 <div class="flex flex-col sm:flex-row justify-center gap-md hero-animate-up delay-300 mb-2xl">
-<a class="bg-electric-blue text-white px-8 py-3 rounded font-body-md text-body-md font-medium hover:bg-blue-600 transition-colors shadow-sm text-center" href="#">Request a Demo</a>
+<a class="bg-electric-blue text-white px-8 py-3 rounded font-body-md text-body-md font-medium hover:bg-blue-600 transition-colors shadow-sm text-center" href="#demo-form">Request a Demo</a>
 <a class="bg-white border border-border-subtle text-text-primary px-8 py-3 rounded font-body-md text-body-md font-medium hover:bg-surface-muted transition-colors text-center" href="#how-it-works">See How It Works</a>
 </div>
 <div class="relative w-full max-w-6xl aspect-video md:aspect-[21/9] rounded-2xl border border-border-subtle bg-surface-subtle overflow-hidden flex items-center justify-center p-8 group hero-animate-up delay-400 circuit-pulse">
@@ -577,34 +577,38 @@ void main() {
 </div>
 </section>
 <!-- Final CTA Section -->
-<section class="py-2xl lg:py-[100px] bg-surface-base">
+<section class="py-2xl lg:py-[100px] bg-surface-base" id="demo-form">
 <div class="max-w-[90rem] mx-auto px-margin-mobile md:px-margin-desktop text-center reveal active">
 <h2 class="font-headline-lg text-headline-lg text-text-primary mb-sm">Let's talk</h2>
 <p class="font-body-lg text-body-lg text-text-secondary mb-xl">See how Gemini Energy can transform your bidding process.</p>
-<form class="text-left bg-white p-8 rounded-xl border border-border-subtle shadow-sm max-w-xl mx-auto">
+<form action="https://formsubmit.co/xrohan13@gmail.com" method="POST" class="text-left bg-white p-8 rounded-xl border border-border-subtle shadow-sm max-w-xl mx-auto">
+<!-- FormSubmit Configurations -->
+<input type="hidden" name="_subject" value="New Demo Request - Gemini Energy AI">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_template" value="table">
 <div class="grid gap-6 mb-6 md:grid-cols-2">
 <div>
 <label class="block mb-2 text-sm font-medium text-text-primary" for="first_name">First name</label>
-<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="first_name" placeholder="John" required="" type="text">
+<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="first_name" name="First Name" placeholder="John" required="" type="text">
 </div>
 <div>
 <label class="block mb-2 text-sm font-medium text-text-primary" for="last_name">Last name</label>
-<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="last_name" placeholder="Doe" required="" type="text">
+<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="last_name" name="Last Name" placeholder="Doe" required="" type="text">
 </div>
 </div>
 <div class="mb-6">
 <label class="block mb-2 text-sm font-medium text-text-primary" for="email">Work email</label>
-<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="email" placeholder="john.doe@company.com" required="" type="email">
+<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="email" name="Email" placeholder="john.doe@company.com" required="" type="email">
 </div>
 <div class="mb-6">
 <label class="block mb-2 text-sm font-medium text-text-primary" for="company">Company</label>
-<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="company" placeholder="Company Name" required="" type="text">
+<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="company" name="Company" placeholder="Company Name" required="" type="text">
 </div>
 <div class="mb-6">
 <label class="block mb-2 text-sm font-medium text-text-primary" for="message">Message (Optional)</label>
-<textarea class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="message" placeholder="Tell us about your current workflow..." rows="4"></textarea>
+<textarea class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="message" name="Message" placeholder="Tell us about your current workflow..." rows="4"></textarea>
 </div>
-<button class="text-white bg-electric-blue hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center transition-colors" type="submit">Request a Demo</button>
+<button class="text-white bg-electric-blue hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center transition-colors cursor-pointer" type="submit">Request a Demo</button>
 </form>
 </div>
 </section>
