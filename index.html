@@ -581,30 +581,29 @@ void main() {
 <div class="max-w-[90rem] mx-auto px-margin-mobile md:px-margin-desktop text-center reveal active">
 <h2 class="font-headline-lg text-headline-lg text-text-primary mb-sm">Let's talk</h2>
 <p class="font-body-lg text-body-lg text-text-secondary mb-xl">See how Gemini Energy can transform your bidding process.</p>
-<form name="demo-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="text-left bg-white p-8 rounded-xl border border-border-subtle shadow-sm max-w-xl mx-auto">
-<input type="hidden" name="form-name" value="demo-request">
-<p class="hidden"><label>Don’t fill this out if you’re human: <input name="bot-field" /></label></p>
+<form name="contact" method="POST" data-netlify="true" class="text-left bg-white p-8 rounded-xl border border-border-subtle shadow-sm max-w-xl mx-auto">
+<input type="hidden" name="form-name" value="contact">
 <div class="grid gap-6 mb-6 md:grid-cols-2">
 <div>
 <label class="block mb-2 text-sm font-medium text-text-primary" for="first_name">First name</label>
-<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="first_name" name="First Name" placeholder="John" required="" type="text">
+<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="first_name" name="first_name" placeholder="John" required="" type="text">
 </div>
 <div>
 <label class="block mb-2 text-sm font-medium text-text-primary" for="last_name">Last name</label>
-<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="last_name" name="Last Name" placeholder="Doe" required="" type="text">
+<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="last_name" name="last_name" placeholder="Doe" required="" type="text">
 </div>
 </div>
 <div class="mb-6">
 <label class="block mb-2 text-sm font-medium text-text-primary" for="email">Work email</label>
-<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="email" name="Email" placeholder="john.doe@company.com" required="" type="email">
+<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="email" name="email" placeholder="john.doe@company.com" required="" type="email">
 </div>
 <div class="mb-6">
 <label class="block mb-2 text-sm font-medium text-text-primary" for="company">Company</label>
-<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="company" name="Company" placeholder="Company Name" required="" type="text">
+<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="company" name="company" placeholder="Company Name" required="" type="text">
 </div>
 <div class="mb-6">
 <label class="block mb-2 text-sm font-medium text-text-primary" for="message">Message (Optional)</label>
-<textarea class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="message" name="Message" placeholder="Tell us about your current workflow..." rows="4"></textarea>
+<textarea class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="message" name="message" placeholder="Tell us about your current workflow..." rows="4"></textarea>
 </div>
 <button class="text-white bg-electric-blue hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center transition-colors cursor-pointer" type="submit">Request a Demo</button>
 </form>
