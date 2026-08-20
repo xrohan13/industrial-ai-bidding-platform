@@ -1,0 +1,666 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Gemini Energy - The AI Copilot for Energy Sourcing and Bidding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-high": "#e6e7f2",
+            "surface-muted": "#f1f5f9",
+            "on-error": "#ffffff",
+            "primary-fixed-dim": "#adc6ff",
+            "inverse-primary": "#adc6ff",
+            "on-surface-variant": "#424754",
+            "inverse-on-surface": "#eff0fa",
+            "inverse-surface": "#2e3038",
+            "surface-container-highest": "#e1e2ec",
+            "surface-bright": "#f9f9ff",
+            "error-container": "#ffdad6",
+            "secondary": "#565e74",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-primary-fixed": "#001a42",
+            "surface-base": "#ffffff",
+            "surface-tint": "#005ac2",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#b75b00",
+            "secondary-fixed-dim": "#bec6e0",
+            "surface-container": "#ecedf7",
+            "on-background": "#191b23",
+            "surface": "#f9f9ff",
+            "on-primary-container": "#fefcff",
+            "on-tertiary-container": "#fffbff",
+            "surface-dim": "#d8d9e3",
+            "on-tertiary-fixed": "#311400",
+            "text-primary": "#0f172a",
+            "surface-variant": "#e1e2ec",
+            "text-secondary": "#475569",
+            "on-primary": "#ffffff",
+            "on-surface": "#191b23",
+            "background": "#f9f9ff",
+            "text-muted": "#94a3b8",
+            "tertiary": "#924700",
+            "error": "#ba1a1a",
+            "outline-variant": "#c2c6d6",
+            "secondary-fixed": "#dae2fd",
+            "secondary-container": "#dae2fd",
+            "border-subtle": "#e2e8f0",
+            "surface-subtle": "#f8fafc",
+            "outline": "#727785",
+            "surface-container-low": "#f2f3fd",
+            "on-tertiary-fixed-variant": "#723600",
+            "on-error-container": "#93000a",
+            "tertiary-fixed-dim": "#ffb786",
+            "primary-container": "#2170e4",
+            "on-secondary-fixed": "#131b2e",
+            "primary": "#0058be",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed-variant": "#004395",
+            "on-secondary-container": "#5c647a",
+            "primary-fixed": "#d8e2ff",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed": "#ffdcc6",
+            "electric-blue": "#3b82f6"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-mobile": "16px",
+            "xl": "32px",
+            "2xl": "48px",
+            "lg": "24px",
+            "margin-desktop": "40px",
+            "gutter": "24px",
+            "xs": "4px",
+            "md": "16px",
+            "sm": "8px"
+          },
+          "fontFamily": {
+            "headline-md": ["Inter"],
+            "display-lg": ["Inter"],
+            "headline-lg-mobile": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "label-caps": ["JetBrains Mono"],
+            "body-lg": ["Inter"]
+          },
+          "fontSize": {
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    
+    /* Scroll Reveal Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Pulse CTA */
+    @keyframes subtlePulse {
+      0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+    .btn-pulse {
+      animation: subtlePulse 2s infinite;
+    }
+
+    /* Sticky Header Transition */
+    #main-header {
+      transition: background-color 0.3s ease, border-bottom-color 0.3s ease;
+    }
+    #main-header.scrolled {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    /* Technical Drawing Animation placeholder */
+    .tech-line {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: draw 3s ease forwards;
+    }
+    @keyframes draw {
+      to { stroke-dashoffset: 0; }
+    }
+
+    /* Hero Entrance Animation */
+    .hero-animate-up {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: heroFadeInUp 0.8s ease-out forwards;
+    }
+    @keyframes heroFadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
+    .delay-400 { animation-delay: 400ms; }
+
+    /* Circuit Shimmer Animation */
+    @keyframes circuitShimmer {
+      0% { opacity: 0.8; }
+      50% { opacity: 1; box-shadow: 0 0 20px rgba(59, 130, 246, 0.1); }
+      100% { opacity: 0.8; }
+    }
+    .circuit-pulse {
+      animation: circuitShimmer 4s ease-in-out infinite;
+    }
+    
+    @keyframes slideShimmer {
+      0% { transform: translateX(-150%) skewX(-15deg); }
+      100% { transform: translateX(150%) skewX(-15deg); }
+    }
+    .shimmer-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(to right, transparent, rgba(59, 130, 246, 0.05), transparent);
+      animation: slideShimmer 3s infinite;
+      pointer-events: none;
+      z-index: 20;
+    }
+  </style>
+</head>
+<body class="bg-surface-base text-text-primary font-body-md antialiased overflow-x-hidden selection:bg-primary selection:text-white">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 border-b border-transparent py-6" id="main-header">
+<div class="flex justify-between items-center max-w-[90rem] mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex items-center gap-2">
+<img alt="Gemini Energy Logo" class="object-contain w-10 h-10" src="https://lh3.googleusercontent.com/aida/AP1WRLsAf7KJymICKb3kvqwpUJG_mUu6x1SmqhVr3X6rlzElFcAx8RQZSs0CLt1e7RIWyuSwA9aEdKaK7BQV8MBN4iEp_ZmFBaQZUu2fTpsp3FE-_h8SOV2Oah6S3jFoEsDSKE5ckJtaOm2x70MELrYFMuAlxhNRmeNJWlLz8xXyvbwP4QpKeF_jIqZEDBEFr3TFR-7qxZUimYnA0TqrVdo4nHlUDW2V2K1kLbtzWVaY4cB3EYW5HYPn2D1mmHE">
+<span class="font-headline-lg text-text-primary text-3xl font-semibold flex items-center" style="opacity: 0;">GeminiEnergy <span class="text-electric-blue ml-2">AI</span></span>
+</div>
+<div class="flex items-center gap-md">
+<a class="btn-pulse bg-electric-blue text-white px-6 rounded font-body-md text-body-md font-medium hover:bg-blue-600 transition-colors shadow-sm py-2.5" href="#">Request a Demo</a>
+</div>
+</div>
+</header>
+<main class="pt-[100px]">
+<!-- Hero Section -->
+<section class="max-w-[90rem] mx-auto px-margin-mobile md:px-margin-desktop py-2xl lg:py-[120px] flex flex-col items-center text-center">
+<h1 class="font-display-lg text-display-lg text-text-primary leading-tight hero-animate-up delay-100 max-w-4xl">
+          The AI Copilot for Industrial Sourcing<div class="">&nbsp;and Bidding
+        </div></h1>
+<p class="font-body-lg text-body-lg text-text-secondary max-w-2xl mx-auto mt-lg mb-xl hero-animate-up delay-200">
+          Stop manually matching specs. Our AI ingests complex RFQs, instantly cross-references your entire catalog, and drafts winning bids in seconds, not days.
+        </p>
+<div class="flex flex-col sm:flex-row justify-center gap-md hero-animate-up delay-300 mb-2xl">
+<a class="bg-electric-blue text-white px-8 py-3 rounded font-body-md text-body-md font-medium hover:bg-blue-600 transition-colors shadow-sm text-center" href="#">Request a Demo</a>
+<a class="bg-white border border-border-subtle text-text-primary px-8 py-3 rounded font-body-md text-body-md font-medium hover:bg-surface-muted transition-colors text-center" href="#how-it-works">See How It Works</a>
+</div>
+<div class="relative w-full max-w-6xl aspect-video md:aspect-[21/9] rounded-2xl border border-border-subtle bg-surface-subtle overflow-hidden flex items-center justify-center p-8 group hero-animate-up delay-400 circuit-pulse">
+<!-- Technical Drawing Visualization -->
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:24px_24px]"></div>
+<!-- STITCH_SHADER_START:ANIMATION_21 class="relative z-10 w-full aspect-video rounded-2xl overflow-hidden shadow-2xl" -->
+<div class="relative z-10 w-full aspect-video rounded-2xl overflow-hidden shadow-2xl" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_21" style="display:block;width:100%;height:100%" width="1086" height="611"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_21');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+
+uniform float u_time;
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+
+varying vec2 v_texCoord;
+
+void main() {
+    vec2 uv = v_texCoord;
+    vec2 m = u_mouse / u_resolution;
+    
+    // Scale UV for more complexity
+    vec2 p = uv * 2.0 - 1.0;
+    p.x *= u_resolution.x / u_resolution.y;
+    
+    float time = u_time * 0.3;
+    
+    // Create organic flowing layers
+    float flow = 0.0;
+    for(float i = 1.0; i < 4.0; i++) {
+        p.x += 0.3 / i * sin(i * 3.0 * p.y + time + m.x * 0.5);
+        p.y += 0.3 / i * cos(i * 3.0 * p.x + time + m.y * 0.5);
+        flow += abs(sin(p.x + p.y));
+    }
+    
+    // Base colors from Gemini Energy palette (Electric Blue #3b82f6)
+    vec3 color1 = vec3(0.23, 0.51, 0.96); // #3b82f6
+    vec3 color2 = vec3(0.05, 0.1, 0.2);   // Deep Navy
+    vec3 color3 = vec3(1.0, 1.0, 1.0);    // White highlights
+    
+    // Combine layers
+    vec3 finalColor = mix(color2, color1, flow * 0.5);
+    finalColor += color3 * pow(flow * 0.4, 8.0); // Bright spectral glints
+    
+    // Subtle vignette
+    float v = 1.0 - smoothstep(0.5, 1.5, length(v_texCoord - 0.5));
+    finalColor *= v;
+    
+    gl_FragColor = vec4(finalColor, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_21 -->
+<div class="shimmer-overlay"></div>
+</div>
+</section>
+<!-- Problem Section -->
+<section class="bg-surface-subtle py-2xl lg:py-[100px]" id="problem">
+<div class="max-w-[90rem] mx-auto px-margin-mobile md:px-margin-desktop reveal active">
+<div class="text-center mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-text-primary">Sourcing and bidding shouldn't take days</h2>
+</div>
+<div class="grid md:grid-cols-3 gap-lg">
+<div class="bg-white p-lg rounded-lg border border-border-subtle hover:shadow-[0_10px_15px_-3px_rgba(15,23,42,0.08)] hover:border-electric-blue transition-all duration-300 flex flex-col items-center text-center">
+<img class="w-16 h-16 mb-md" data-alt="Minimalist line art icon of a document with a magnifying glass in electric blue on a white background." src="https://lh3.googleusercontent.com/aida/AP1WRLsnhPWeVTWu_DlIWTZSXBRVklIR0FuGPa2cVBNZv2QQLhUoTqoI_f3YGZRKeaNXNLNQQkfuqrbEDffkGpzoONoDS0rjcyvkxmfVy6xyH6JwrVoiWHp_HOZb5oHPjSoMDDj02UqCx0uRu0sS4rzN5ZMFR-nDliV2SgHPa_UpscwOcrxei_iKeYdn3PAtRHBOXGJUJiAqhitchzOFG_opk7RDy26JPQKRPGomE-lZNhEmDgNB8K_u-3ts_NtU">
+<h3 class="font-headline-md text-headline-md text-text-primary mb-sm text-lg">Manual Matching</h3>
+<p class="font-body-md text-body-md text-text-secondary">Engineers waste hours cross-referencing hundreds of lines of specs against massive product catalogs.</p>
+</div>
+<div class="bg-white p-lg rounded-lg border border-border-subtle hover:shadow-[0_10px_15px_-3px_rgba(15,23,42,0.08)] hover:border-electric-blue transition-all duration-300 flex flex-col items-center text-center">
+<img class="w-16 h-16 mb-md" data-alt="Minimalist line art clock icon in electric blue on a white background." src="https://lh3.googleusercontent.com/aida/AP1WRLv9cd-emsJ-PeuSmhnUoBJ6U37g10TXCuT1PylorEMHlMMX1QMui2Qs9VS-WPO0O8kHACjjKtpgbboXUx2VFUNT72QPQELFrzT9MBWh1SruVnXPp1eUAxEhs3ndO4zM_NeDC3PPYQuOZpMCjIhFe4UgM6psyFb3g4M5WoSwZNNd0lmtFnyBgPbO9LMPWe6WE_g6l787tEjfbtq2fTEQOSSJmRt9sNL2k7SAkdADlQWVpNE3vomcYHoVebq0">
+<h3 class="font-headline-md text-headline-md text-text-primary mb-sm text-lg">Slow Turnaround</h3>
+<p class="font-body-md text-body-md text-text-secondary">Complex quotes take weeks to assemble, delaying responses and frustrating urgent buyers.</p>
+</div>
+<div class="bg-white p-lg rounded-lg border border-border-subtle hover:shadow-[0_10px_15px_-3px_rgba(15,23,42,0.08)] hover:border-electric-blue transition-all duration-300 flex flex-col items-center text-center">
+<img class="w-16 h-16 mb-md" data-alt="Minimalist line art calendar icon with an alert symbol in electric blue on a white background." src="https://lh3.googleusercontent.com/aida/AP1WRLsEMDAilihkMiJhEDYLea2zhgn3TwP4vCl29pkpewKC0nnQNGPT52tnlWbgI7IwlUfY8mc-_heNT7vuT-d8casQ6AOn7UuD1akAy2N4dUKJiFHtSjef1QL0AZ5LRlpAXwlaKVylESLxSv8r2e8706ZGgKgxvsa6eTYGbaRWquXPRHuk4kcjTcpZ_7Nl0Ibf_AOizc7Y065p08oBsWN5l2b3MfegxqlfHHsJ74SzwQekOp_WC-8LFrOM60s">
+<h3 class="font-headline-md text-headline-md text-text-primary mb-sm text-lg">Missed Opportunities</h3>
+<p class="font-body-md text-body-md text-text-secondary">Slow processes mean you bid on fewer projects and lose out to faster, less qualified competitors.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Solution Section -->
+<section class="py-2xl lg:py-[100px] bg-surface-base" id="platform">
+<div class="max-w-[90rem] mx-auto px-margin-mobile md:px-margin-desktop reveal active">
+<div class="text-center mb-2xl">
+<h2 class="font-headline-lg text-headline-lg text-text-primary mb-sm">Two AI copilots, one platform</h2>
+<p class="font-body-lg text-body-lg text-text-secondary max-w-3xl mx-auto">Purpose-built workflows for the two most critical bottlenecks in industrial sales.</p>
+</div>
+<!-- Sub-block A -->
+<div class="grid lg:grid-cols-2 gap-xl items-center mb-2xl">
+<div>
+<h3 class="font-headline-md text-headline-md text-text-primary mb-md">RFQ-to-Quote Copilot</h3>
+<p class="font-body-md text-body-md text-text-secondary mb-lg">Instantly turn complex customer requests into accurate, compliant quotes.</p>
+<div class="space-y-md">
+<div class="flex items-start gap-md">
+<div class="w-8 h-8 rounded-full bg-surface-subtle border border-border-subtle flex items-center justify-center flex-shrink-0 text-electric-blue font-semibold">1</div>
+<div>
+<h4 class="font-body-md text-body-md font-semibold text-text-primary">Ingest</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">Upload RFQs, spreadsheets, and technical specs.</p>
+</div>
+</div>
+<div class="flex items-start gap-md">
+<div class="w-8 h-8 rounded-full bg-surface-subtle border border-border-subtle flex items-center justify-center flex-shrink-0 text-electric-blue font-semibold">2</div>
+<div>
+<h4 class="font-body-md text-body-md font-semibold text-text-primary">Parse</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">AI extracts line items, quantities, and technical requirements.</p>
+</div>
+</div>
+<div class="flex items-start gap-md">
+<div class="w-8 h-8 rounded-full bg-surface-subtle border border-border-subtle flex items-center justify-center flex-shrink-0 text-electric-blue font-semibold">3</div>
+<div>
+<h4 class="font-body-md text-body-md font-semibold text-text-primary">Match</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">Cross-references against your catalog to find the exact or closest equivalent products.</p>
+</div>
+</div>
+<div class="flex items-start gap-md">
+<div class="w-8 h-8 rounded-full bg-surface-subtle border border-border-subtle flex items-center justify-center flex-shrink-0 text-electric-blue font-semibold">4</div>
+<div>
+<h4 class="font-body-md text-body-md font-semibold text-text-primary">Draft</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">Generates a formatted quote ready for human review.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-subtle border border-border-subtle rounded-xl p-8 aspect-video flex items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:24px_24px]"></div>
+<div class="relative z-10 flex flex-col gap-4 w-full max-w-sm">
+<div class="bg-white p-4 rounded border border-border-subtle shadow-sm flex items-center justify-between transform transition-transform group-hover:translate-x-2">
+<span class="text-sm font-medium">Customer RFQ.pdf</span>
+<span class="material-symbols-outlined text-text-muted">description</span>
+</div>
+<div class="flex justify-center text-electric-blue">
+<span class="material-symbols-outlined">arrow_downward</span>
+</div>
+<div class="bg-white p-4 rounded border border-electric-blue shadow-[0_0_15px_rgba(59,130,246,0.2)] flex items-center justify-between transform transition-transform group-hover:scale-105">
+<span class="text-sm font-medium text-electric-blue">AI Parsing &amp; Matching</span>
+<span class="material-symbols-outlined text-electric-blue animate-pulse">memory</span>
+</div>
+<div class="flex justify-center text-electric-blue">
+<span class="material-symbols-outlined">arrow_downward</span>
+</div>
+<div class="bg-white p-4 rounded border border-border-subtle shadow-sm flex items-center justify-between transform transition-transform group-hover:translate-x-2">
+<span class="text-sm font-medium">Drafted Quote</span>
+<span class="material-symbols-outlined text-text-muted">request_quote</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Sub-block B -->
+<div class="grid lg:grid-cols-2 gap-xl items-center">
+<div class="order-2 lg:order-1 bg-surface-subtle border border-border-subtle rounded-xl p-8 aspect-video flex items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:24px_24px]"></div>
+<div class="relative z-10 flex flex-col gap-4 w-full max-w-sm">
+<div class="bg-white p-4 rounded border border-border-subtle shadow-sm flex items-center gap-3 transform transition-transform group-hover:-translate-x-2">
+<span class="material-symbols-outlined text-text-muted">folder_open</span>
+<div class="flex-1">
+<div class="h-2 bg-surface-muted rounded w-3/4 mb-2"></div>
+<div class="h-2 bg-surface-muted rounded w-1/2"></div>
+</div>
+</div>
+<div class="bg-white p-4 rounded border border-electric-blue shadow-[0_0_15px_rgba(59,130,246,0.2)] flex items-center gap-3 transform transition-transform group-hover:scale-105 ml-4">
+<span class="material-symbols-outlined text-electric-blue">search_insights</span>
+<div class="flex-1">
+<div class="h-2 bg-blue-100 rounded w-full mb-2"></div>
+<div class="h-2 bg-blue-100 rounded w-5/6"></div>
+</div>
+</div>
+<div class="bg-white p-4 rounded border border-border-subtle shadow-sm flex items-center gap-3 transform transition-transform group-hover:-translate-x-2">
+<span class="material-symbols-outlined text-text-muted">gavel</span>
+<div class="flex-1">
+<div class="h-2 bg-surface-muted rounded w-2/3 mb-2"></div>
+<div class="h-2 bg-surface-muted rounded w-4/5"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2">
+<h3 class="font-headline-md text-headline-md text-text-primary mb-md">Tender &amp; Bid Intelligence</h3>
+<p class="font-body-md text-body-md text-text-secondary mb-lg">Analyze massive tender documents to identify risks, requirements, and past winning strategies.</p>
+<div class="space-y-md">
+<div class="flex items-start gap-md">
+<div class="w-8 h-8 rounded-full bg-surface-subtle border border-border-subtle flex items-center justify-center flex-shrink-0 text-electric-blue font-semibold">1</div>
+<div>
+<h4 class="font-body-md text-body-md font-semibold text-text-primary">Scan</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">Ingest hundreds of pages of tender documents instantly.</p>
+</div>
+</div>
+<div class="flex items-start gap-md">
+<div class="w-8 h-8 rounded-full bg-surface-subtle border border-border-subtle flex items-center justify-center flex-shrink-0 text-electric-blue font-semibold">2</div>
+<div>
+<h4 class="font-body-md text-body-md font-semibold text-text-primary">Highlight</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">Automatically surface critical compliance requirements and potential risks.</p>
+</div>
+</div>
+<div class="flex items-start gap-md">
+<div class="w-8 h-8 rounded-full bg-surface-subtle border border-border-subtle flex items-center justify-center flex-shrink-0 text-electric-blue font-semibold">3</div>
+<div>
+<h4 class="font-body-md text-body-md font-semibold text-text-primary">Retrieve</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">Search past successful bids for relevant boilerplate and technical answers.</p>
+</div>
+</div>
+<div class="flex items-start gap-md">
+<div class="w-8 h-8 rounded-full bg-surface-subtle border border-border-subtle flex items-center justify-center flex-shrink-0 text-electric-blue font-semibold">4</div>
+<div>
+<h4 class="font-body-md text-body-md font-semibold text-text-primary">Synthesize</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">Draft coherent, persuasive bid responses tailored to the specific tender.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Why not ChatGPT Section -->
+<section class="bg-surface-subtle py-2xl lg:py-[100px]" id="features">
+<div class="max-w-[90rem] mx-auto px-margin-mobile md:px-margin-desktop reveal active">
+<div class="text-center mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-text-primary">Why not just use ChatGPT?</h2>
+<p class="font-body-lg text-body-lg text-text-secondary mt-sm">General AI isn't built for industrial precision.</p>
+</div>
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-lg">
+<div class="bg-white p-lg rounded-lg border border-border-subtle hover:border-electric-blue transition-colors duration-300">
+<span class="material-symbols-outlined text-electric-blue text-3xl mb-sm">database</span>
+<h4 class="font-body-md text-body-md font-semibold text-text-primary mb-xs">Proprietary Data</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">We integrate securely with your ERP and catalog data. ChatGPT doesn't know your SKUs.</p>
+</div>
+<div class="bg-white p-lg rounded-lg border border-border-subtle hover:border-electric-blue transition-colors duration-300">
+<span class="material-symbols-outlined text-electric-blue text-3xl mb-sm">account_tree</span>
+<h4 class="font-body-md text-body-md font-semibold text-text-primary mb-xs">Workflow Integration</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">Built to output structured quotes and bid documents, not just conversational text.</p>
+</div>
+<div class="bg-white p-lg rounded-lg border border-border-subtle hover:border-electric-blue transition-colors duration-300">
+<span class="material-symbols-outlined text-electric-blue text-3xl mb-sm">model_training</span>
+<h4 class="font-body-md text-body-md font-semibold text-text-primary mb-xs">Learns From Outcomes</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">Our models tune themselves based on which quotes actually win business over time.</p>
+</div>
+<div class="bg-white p-lg rounded-lg border border-border-subtle hover:border-electric-blue transition-colors duration-300">
+<span class="material-symbols-outlined text-electric-blue text-3xl mb-sm">verified_user</span>
+<h4 class="font-body-md text-body-md font-semibold text-text-primary mb-xs">Built-In Compliance</h4>
+<p class="font-body-sm text-body-sm text-text-secondary">Ensures all matched parts meet the exact specifications and certifications required.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Traction Section -->
+<section class="py-2xl lg:py-[100px] bg-surface-base" id="traction">
+<div class="max-w-[90rem] mx-auto px-margin-mobile md:px-margin-desktop text-center reveal active">
+<h2 class="font-headline-lg text-headline-lg text-text-primary mb-md">Backed by decades of real industry experience</h2>
+<p class="font-body-lg text-body-lg text-text-secondary max-w-3xl mx-auto mb-xl">Our founding team has over two decades of hands-on experience in industrial trading and EPC supply across the Middle East and South Asia — including direct relationships with operators such as Petroleum Development Oman (PDO), ADNOC, Qatar Petroleum, Shell Oman, ONGC, and Dolphin Energy. That real-world network and domain expertise is what's shaping how we build and validate this platform.</p>
+<div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-2xl">oil_barrel</span><span class="font-bold text-lg tracking-tight">PDO</span></div><div class="flex items-center gap-2"><span class="material-symbols-outlined text-2xl">energy_savings_leaf</span><span class="font-bold text-lg tracking-tight">ADNOC</span></div><div class="flex items-center gap-2"><span class="material-symbols-outlined text-2xl">gas_meter</span><span class="font-bold text-lg tracking-tight">Qatar Petroleum</span></div><div class="flex items-center gap-2"><span class="material-symbols-outlined text-2xl">local_gas_station</span><span class="font-bold text-lg tracking-tight">Shell Oman</span></div><div class="flex items-center gap-2"><span class="material-symbols-outlined text-2xl">factory</span><span class="font-bold text-lg tracking-tight">ONGC</span></div><div class="flex items-center gap-2"><span class="material-symbols-outlined text-2xl">waves</span><span class="font-bold text-lg tracking-tight">Dolphin Energy</span></div></div><p class="text-sm text-text-muted mt-8">Names reflect our founding team's industry relationships and experience, not current customers of this platform.</p>
+</div>
+</section>
+<!-- Team Section -->
+<section class="bg-surface-subtle py-2xl lg:py-[100px]" id="team">
+<div class="max-w-[90rem] mx-auto px-margin-mobile md:px-margin-desktop reveal active">
+<div class="text-center mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-text-primary">Who we are</h2>
+</div>
+<div class="grid md:grid-cols-3 gap-lg max-w-5xl mx-auto"><div class="text-center flex flex-col items-center">
+  <div class="w-32 h-32 rounded-full overflow-hidden border border-border-subtle mb-md">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuANoG5Tngp2bFipAC1BbMv6kYoSzni3csAxv27ujwckDmj9gACHWJgBU0gwbARJQlyn4OBfYhBtv5nSNonqRdVmNEMJh4kKsPZ-sYvy6IgDrJx1K3zHr8-wb1f836ev3rEKItYVxdFfMXmpBROX4oaZKzDZOPX3VRfZY2ogR6MdjdSd1LNDo0joerHEpC9OHy58cC70QmEplkHheWzSgury7SAXb6AkPNENoWKXF2iTJkZ51-9iLpNLzfeLy-kxYT94z54hpc2Z6GpfmKs" alt="Sudhakar R. Rao" class="w-full h-full object-cover">
+  </div>
+  <h4 class="font-body-lg text-body-lg font-semibold text-text-primary">Sudhakar R. Rao<div class="">Founder</div></h4>
+  <p class="font-body-sm text-body-sm text-electric-blue mb-xs">Founder &amp; Chairman at Gemini Group</p>
+  <p class="font-body-sm text-body-sm text-text-secondary"><br></p>
+</div>
+<div class="text-center flex flex-col items-center">
+  <div class="w-32 h-32 rounded-full overflow-hidden border border-border-subtle mb-md">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8KPDd4B8-EkjhjBs6NgcPueHMVUN2Vh8ON_ZUDVMjHdCEdoBXaIL-gMa6D9PU4yjqFh8_scvk1wQah_k_kRuhpJTwfYDBlasctEwUm-4FgJWWr8dZRa9j4vlTznAIi2gi60wtyklm6eKWyIMRa3wwSUsySg_tMGAIUygHD616-w4eHTx2w8NBBB5r6TZQPdMwbmyXrf4ZfKxZeR0iBBsqBLn2_eOIt70K7njMeq9L7QyxIUPePOE2jP5lptOMJ1DwpwQ" alt="Prabhakar R. Rao" class="w-full h-full object-cover">
+  </div>
+  <h4 class="font-body-lg text-body-lg font-semibold text-text-primary">Prabhakar R. Rao<div class="">Founder</div></h4>
+  <p class="font-body-sm text-body-sm text-electric-blue">Managing Director at Gemini Group</p>
+</div>
+<div class="text-center flex flex-col items-center">
+  <div class="w-32 h-32 rounded-full overflow-hidden border border-border-subtle mb-md">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTk5wlbr7boza1yc3KvoJzH3NyK1MBKQu8s_j8dm18Y4aN-INa4NL5k1AcDO6y0JtMWqv3hKkkbGswTpZ4jaQYDDl8yyglI71n9mXkM74KY3XfVV7ebrsnD5zxKQbfGXuut2-h8GhIdd6mOSjBJWs3n0EwEeFQW6B5viKxC2QYFphkJFout34MA8sCkbITB0cb8J2NoAxfXKh-bhXoVUtUjmpszaIjjCKbP6lhJylFmOtfA46nC1YGnl2H79xPQrx7PMaG63YJqhqHbIU" alt="SDT Prasad" class="w-full h-full object-cover">
+  </div>
+  <h4 class="font-body-lg text-body-lg font-semibold text-text-primary">SDT Prasad<div class="">Co-founder</div></h4>
+  <p class="font-body-sm text-body-sm text-electric-blue">Chief Executive Officer, Gemini Energy L.L.C</p>
+</div></div>
+</div>
+</section>
+<!-- Final CTA Section -->
+<section class="py-2xl lg:py-[100px] bg-surface-base">
+<div class="max-w-[90rem] mx-auto px-margin-mobile md:px-margin-desktop text-center reveal active">
+<h2 class="font-headline-lg text-headline-lg text-text-primary mb-sm">Let's talk</h2>
+<p class="font-body-lg text-body-lg text-text-secondary mb-xl">See how Gemini Energy can transform your bidding process.</p>
+<form class="text-left bg-white p-8 rounded-xl border border-border-subtle shadow-sm max-w-xl mx-auto">
+<div class="grid gap-6 mb-6 md:grid-cols-2">
+<div>
+<label class="block mb-2 text-sm font-medium text-text-primary" for="first_name">First name</label>
+<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="first_name" placeholder="John" required="" type="text">
+</div>
+<div>
+<label class="block mb-2 text-sm font-medium text-text-primary" for="last_name">Last name</label>
+<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="last_name" placeholder="Doe" required="" type="text">
+</div>
+</div>
+<div class="mb-6">
+<label class="block mb-2 text-sm font-medium text-text-primary" for="email">Work email</label>
+<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="email" placeholder="john.doe@company.com" required="" type="email">
+</div>
+<div class="mb-6">
+<label class="block mb-2 text-sm font-medium text-text-primary" for="company">Company</label>
+<input class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="company" placeholder="Company Name" required="" type="text">
+</div>
+<div class="mb-6">
+<label class="block mb-2 text-sm font-medium text-text-primary" for="message">Message (Optional)</label>
+<textarea class="bg-surface-subtle border border-border-subtle text-text-primary text-sm rounded focus:ring-electric-blue focus:border-electric-blue block w-full p-2.5" id="message" placeholder="Tell us about your current workflow..." rows="4"></textarea>
+</div>
+<button class="text-white bg-electric-blue hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center transition-colors" type="submit">Request a Demo</button>
+</form>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-subtle border-t border-border-subtle pt-2xl pb-lg">
+<div class="max-w-[90rem] mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-lg reveal">
+<div class="flex flex-col gap-sm">
+<div class="flex items-center gap-2 mb-sm">
+<img alt="Gemini Energy Logo" class="w-8 h-8 rounded-sm object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLsSyQYBAjL-S1TIReIE-HNsTgN0SSYl5cKd2CpCB0uplR41Ealb0KYUp7n5jNgqBoEA9heJ2p2bGVMdAp9h3GLx8PyNvnGzGNACra2YkpfHr7J5Zbs1AwgY30o257ovxEAypHqsEzeu45A9M7LXDAwWNx5k10EQG_DLa6TUatRf_YpsQjprnco_lI8KTAh_E5lyWcGBuHC4ajn4YChOIBLcfPYLU-APxVL9kXYz6dBO7qnmyEbkUf5KjEGP">
+<span class="font-label-caps text-label-caps text-text-muted">GEMINI ENERGY</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">© 2024 Gemini Energy. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap gap-md md:justify-end items-center">
+<a class="font-body-sm text-body-sm text-primary underline hover:text-text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors" href="#">Contact Support</a>
+<a class="font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors" href="#">Security</a>
+</div>
+</div>
+</footer>
+</main>
+<script>
+    // Scroll Reveal Logic
+    function reveal() {
+      var reveals = document.querySelectorAll(".reveal");
+      for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 100;
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("active");
+        }
+      }
+    }
+    window.addEventListener("scroll", reveal);
+    reveal(); // Trigger on load
+
+    // Sticky Header Logic
+    const header = document.getElementById('main-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+</body></html>
